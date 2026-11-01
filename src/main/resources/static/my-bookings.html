@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | BOOK YOUR SEAT</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 20px;
+            background: #faf7f3;
+            color: #342a23;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #85766c;
+        }
+
+        .home-btn {
+            background: #ad754f;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .booking-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .reference {
+            color: #ad754f;
+            font-weight: bold;
+        }
+
+        .status {
+            background: #fff1d6;
+            color: #98651b;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 22px;
+            padding-top: 20px;
+        }
+
+        .detail-label {
+            color: #8b8179;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .detail-value {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .price {
+            color: #ad754f;
+            font-size: 20px;
+        }
+
+        #message {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            color: #85766c;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .booking-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div>
+            <h1>My Bookings</h1>
+            <p class="subtitle">Manage and view your salon appointments.</p>
+        </div>
+
+        <a href="/" class="home-btn">Back to Home</a>
+    </header>
+
+    <div id="message">Loading your bookings...</div>
+
+    <div id="bookingsList"></div>
+
+</div>
+
+<script>
+    async function loadBookings() {
+
+        const message = document.getElementById("message");
+        const bookingsList = document.getElementById("bookingsList");
+
+        try {
+
+            const response = await fetch("/api/my-bookings", {
+                method: "GET",
+                credentials: "same-origin"
+            });
+
+            const data = await response.json();
+
+            if (response.status === 401) {
+                message.textContent = "Please login to view your bookings.";
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(data.message || "Unable to load bookings.");
+            }
+
+            message.style.display = "none";
+
+            if (data.length === 0) {
+                message.style.display = "block";
+                message.textContent = "You haven't made any bookings yet.";
+                return;
+            }
+
+            bookingsList.innerHTML = data.map(booking => {
+
+                const dateParts = booking.appointmentDate.split("-");
+                const formattedDate =
+                    dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
+
+                const status = booking.bookingStatus || "PENDING";
+
+                return `
+                    <div class="booking-card">
+
+                        <div class="booking-top">
+                            <div>
+                                <div class="detail-label">Booking Reference</div>
+                                <div class="reference">
+                                    ${booking.bookingReference}
+                                </div>
+                            </div>
+
+                            <span class="status">
+                                ${status}
+                            </span>
+                        </div>
+
+                        <div class="booking-details">
+
+                            <div>
+                                <div class="detail-label">Salon</div>
+                                <div class="detail-value">
+                                    ${booking.salonName}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="detail-label">Service</div>
+                                <div class="detail-value">
+                                    ${booking.serviceName}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="detail-label">Appointment Date</div>
+                                <div class="detail-value">
+                                    ${formattedDate}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="detail-label">Appointment Time</div>
+                                <div class="detail-value">
+                                    ${booking.startTime} - ${booking.endTime}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="detail-label">Total Price</div>
+                                <div class="detail-value price">
+                                    ₹${booking.totalPrice}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+
+            }).join("");
+
+        } catch (error) {
+
+            message.style.display = "block";
+            message.textContent = error.message;
+
+        }
+    }
+
+    loadBookings();
+</script>
+
+</body>
+</html>

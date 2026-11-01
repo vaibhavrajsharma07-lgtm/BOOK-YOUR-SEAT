@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BOOK YOUR SEAT | Salon Booking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* HOMEPAGE SPECIFIC STYLES */
+
+        .hero {
+            min-height: 570px;
+            padding: 90px 7%;
+            display: flex;
+            align-items: center;
+            background:
+                    linear-gradient(90deg, rgba(35,26,21,.82), rgba(35,26,21,.2)),
+                    url("https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600")
+                    center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: white;
+        }
+
+        .hero-tag {
+            color: #e9c5a6;
+            font-size: 12px;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.15;
+            margin: 20px 0;
+        }
+
+        .hero-content p {
+            color: #f0e9e3;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #ad7550;
+            color: white;
+            padding: 14px 27px;
+            border-radius: 7px;
+            font-weight: 700;
+        }
+
+        .hero-btn:hover {
+            background: #805238;
+        }
+
+        .search-container {
+            max-width: 650px;
+            margin: -35px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .search-box {
+            display: flex;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 35px rgba(0,0,0,.12);
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 0;
+            border: none;
+            outline: none;
+            padding: 12px 15px;
+            font-size: 15px;
+        }
+
+        .search-icon {
+            background: #ad7550;
+            color: white;
+            border: none;
+            padding: 0 22px;
+            border-radius: 7px;
+        }
+
+        .categories {
+            background: #faf6f1;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 28px 18px;
+            text-align: center;
+            border-radius: 13px;
+            border: 1px solid #eee7df;
+            transition: .3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.07);
+        }
+
+        .category-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 15px;
+            display: grid;
+            place-items: center;
+            background: #f7eee6;
+            border-radius: 50%;
+            font-size: 26px;
+        }
+
+        .category-card h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .category-card p {
+            color: #93877d;
+            font-size: 13px;
+        }
+
+        .section-container {
+            padding: 75px 6%;
+        }
+
+        .section-heading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            margin-bottom: 38px;
+        }
+
+        .section-tag {
+            color: #b77d56;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin: 8px 0;
+        }
+
+        .section-heading p {
+            color: #8d8178;
+            font-size: 15px;
+        }
+
+        /* SALON CARDS */
+
+        .salon-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .salon-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #f0ebe5;
+            box-shadow: 0 8px 30px rgba(0,0,0,.06);
+            transition: .3s;
+        }
+
+        .salon-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.1);
+        }
+
+        .salon-card img {
+            width: 100%;
+            height: 245px;
+            object-fit: cover;
+        }
+
+        .salon-info {
+            padding: 23px;
+        }
+
+        .salon-rating {
+            color: #d59b39;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .salon-info h3 {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .salon-info p {
+            color: #93877e;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .salon-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .salon-price {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .details-btn {
+            background: #ad7550;
+            color: white;
+            border: none;
+            padding: 12px 17px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .details-btn:hover {
+            background: #805238;
+        }
+
+        .explore-link {
+            color: #a86e49;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* OFFERS */
+
+        .offers-section {
+            padding: 80px 6%;
+            background: #f8f3ed;
+            text-align: center;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 28px;
+        }
+
+        .offer-card {
+            min-height: 250px;
+            padding: 35px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(50,35,25,.08);
+            transition: .3s;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .offer-one {
+            background: linear-gradient(135deg,#392920,#9b6746);
+            color: white;
+        }
+
+        .offer-two {
+            background: linear-gradient(135deg,#ead4c0,#f8eade);
+            color: #382a24;
+        }
+
+        .offer-label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .offer-card h3 {
+            font-size: 36px;
+            margin: 12px 0;
+        }
+
+        .offer-card p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .offer-code {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px dashed currentColor;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .offer-decoration {
+            position: absolute;
+            right: 15px;
+            bottom: 0;
+            font-size: 90px;
+            opacity: .12;
+        }
+
+        .offer-highlight {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 9px 17px;
+            border-radius: 30px;
+            background: #efe2d6;
+            color: #986441;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* HAIRSTYLES */
+
+        .trending-section {
+            padding: 80px 6%;
+            background: #fffdfb;
+            text-align: center;
+        }
+
+        .hairstyle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 28px;
+            text-align: left;
+        }
+
+        .hairstyle-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #eee5dc;
+            box-shadow: 0 8px 25px rgba(50,35,25,.06);
+            transition: .3s;
+        }
+
+        .hairstyle-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 35px rgba(50,35,25,.12);
+        }
+
+        .hairstyle-image {
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hairstyle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .hairstyle-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .style-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: white;
+            color: #986441;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .hairstyle-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .hairstyle-info h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .hairstyle-info p {
+            font-size: 13px;
+            color: #93877e;
+        }
+
+        .style-arrow {
+            color: #ad7550;
+            font-size: 24px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #302820;
+            color: white;
+            padding: 50px 6% 25px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+            margin-bottom: 35px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: #d2a17b;
+        }
+
+        .footer-description {
+            color: #c3b8ad;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 350px;
+        }
+
+        .footer h3 {
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #c3b8ad;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #55483d;
+            padding-top: 22px;
+            text-align: center;
+            color: #bfb2a6;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .salon-container,
+            .hairstyle-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 460px;
+                padding: 60px 6%;
+            }
+
+            .hero-content h1 {
+                font-size: 43px;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .section-container,
+            .offers-section,
+            .trending-section {
+                padding: 55px 5%;
+            }
+
+            .section-heading h2 {
+                font-size: 30px;
+            }
+
+            .salon-container,
+            .hairstyle-grid,
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2,1fr);
+                gap: 12px;
+            }
+
+            .offer-card {
+                min-height: 220px;
+            }
+
+            .hairstyle-image {
+                height: 250px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+    <nav class="navbar">
+
+        <a href="/Index.html" class="logo">
+            BOOK YOUR <span>SEAT.</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="/Index.html">Home</a></li>
+           <li> <a href="/my-bookings.html" id="myBookingsLink">
+                My Orders
+            </a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#salons">Salons</a></li>
+            <li><a href="#offers">Offers</a></li>
+            <li><a href="#hairstyles">Hairstyles</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="/login.html">Login</a>
+            <a href="/signup.html">Sign Up</a>
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">YOUR BEAUTY, YOUR STYLE</span>
+
+        <h1>Look Good.<br>Feel Beautiful.</h1>
+
+        <p>
+            Discover the best salons around you.
+            Explore premium services and book your next
+            beauty experience with ease.
+        </p>
+
+        <a href="#salons" class="hero-btn">
+            Explore Salons →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- SEARCH BAR -->
+
+<div class="search-container">
+
+    <div class="search-box">
+
+        <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your favourite salon..."
+                oninput="searchSalons()">
+
+        <button
+                type="button"
+                class="search-icon"
+                onclick="searchSalons()">
+            Search
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CATEGORIES -->
+
+<section class="section-container categories" id="categories">
+
+    <div class="section-heading">
+
+        <span class="section-tag">EXPLORE OUR SERVICES</span>
+
+        <h2>Beauty Categories</h2>
+
+        <p>Find the perfect service for your style.</p>
+
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category-card">
+            <div class="category-icon">✂️</div>
+            <h3>Hair Styling</h3>
+            <p>Discover your perfect hairstyle.</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">✨</div>
+            <h3>Skin Care</h3>
+            <p>Give your skin the care it deserves.</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">💄</div>
+            <h3>Makeup</h3>
+            <p>Look beautiful for every occasion.</p>
+        </div>
+
+        <div class="category-card">
+            <div class="category-icon">💈</div>
+            <h3>Beard Styling</h3>
+            <p>Get a fresh and stylish look.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TOP SALONS -->
+
+<section class="section-container" id="salons">
+
+    <div class="section-heading">
+
+        <span class="section-tag">FIND YOUR FAVOURITE</span>
+
+        <h2>Top Salons</h2>
+
+        <p>Discover the most popular salons around you.</p>
+
+        <a href="#salons" class="explore-link">View All →</a>
+
+    </div>
+
+
+    <div class="salon-container" id="salonContainer">
+
+        <!-- STYLE STUDIO -->
+
+        <div class="salon-card">
+
+            <img
+                    src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800"
+                    alt="Style Studio salon">
+
+            <div class="salon-info">
+
+                <div class="salon-rating">⭐ 4.8</div>
+
+                <h3>Style Studio</h3>
+
+                <p>Haircut · Hair Styling</p>
+
+                <div class="salon-bottom">
+
+                    <span class="salon-price">From ₹299</span>
+
+                    <button
+                            type="button"
+                            class="details-btn"
+                            onclick="openSalonDetails('Style Studio')">
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LUXURY LOOKS -->
+
+        <div class="salon-card">
+
+            <img
+                    src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800"
+                    alt="Luxury Looks salon">
+
+            <div class="salon-info">
+
+                <div class="salon-rating">⭐ 4.9</div>
+
+                <h3>Luxury Looks</h3>
+
+                <p>Hair · Makeup · Skin Care</p>
+
+                <div class="salon-bottom">
+
+                    <span class="salon-price">From ₹499</span>
+
+                    <button
+                            type="button"
+                            class="details-btn"
+                            onclick="openSalonDetails('Luxury Looks')">
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- URBAN SALON -->
+
+        <div class="salon-card">
+
+            <img
+                    src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800"
+                    alt="Urban Salon">
+
+            <div class="salon-info">
+
+                <div class="salon-rating">⭐ 4.7</div>
+
+                <h3>Urban Salon</h3>
+
+                <p>Premium Hair & Beauty</p>
+
+                <div class="salon-bottom">
+
+                    <span class="salon-price">From ₹399</span>
+
+                    <button
+                            type="button"
+                            class="details-btn"
+                            onclick="openSalonDetails('Urban Salon')">
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display:none; text-align:center; margin-top:25px;">
+        No salons found. Try another search.
+    </p>
+
+</section>
+
+
+<!-- SPECIAL OFFERS -->
+
+<section class="offers-section" id="offers">
+
+    <div class="section-heading">
+
+        <span class="section-tag">EXCLUSIVE DEALS</span>
+
+        <h2>Special Offers</h2>
+
+        <p>Enjoy premium beauty services at special prices.</p>
+
+        <span class="offer-highlight">Limited Time Offers</span>
+
+    </div>
+
+
+    <div class="offers-grid">
+
+        <div class="offer-card offer-one">
+
+            <div>
+                <span class="offer-label">WELCOME OFFER</span>
+
+                <h3>20% OFF</h3>
+
+                <p>On your first salon booking.</p>
+
+                <span class="offer-code">FIRST20</span>
+            </div>
+
+            <div class="offer-decoration">✦</div>
+
+        </div>
+
+
+        <div class="offer-card offer-two">
+
+            <div>
+                <span class="offer-label">SPECIAL DISCOUNT</span>
+
+                <h3>FLAT ₹100 OFF</h3>
+
+                <p>On selected hairstyling services.</p>
+
+                <span class="offer-code">STYLE100</span>
+            </div>
+
+            <div class="offer-decoration">✂</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRENDING HAIRSTYLES -->
+
+<section class="trending-section" id="hairstyles">
+
+    <div class="section-heading">
+
+        <span class="section-tag">GET INSPIRED</span>
+
+        <h2>Trending Hairstyles</h2>
+
+        <p>Explore popular styles and find your next look.</p>
+
+        <a href="#salons" class="explore-link">Explore Salons →</a>
+
+    </div>
+
+
+    <div class="hairstyle-grid">
+
+        <div class="hairstyle-card">
+
+            <div class="hairstyle-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700"
+                        alt="Modern haircut">
+
+                <span class="style-number">01</span>
+
+            </div>
+
+            <div class="hairstyle-info">
+
+                <div>
+                    <h3>Modern Haircut</h3>
+                    <p>Clean and contemporary look.</p>
+                </div>
+
+                <span class="style-arrow">↗</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="hairstyle-card">
+
+            <div class="hairstyle-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=700"
+                        alt="Classic hairstyle">
+
+                <span class="style-number">02</span>
+
+            </div>
+
+            <div class="hairstyle-info">
+
+                <div>
+                    <h3>Classic Style</h3>
+                    <p>Timeless and elegant hairstyle.</p>
+                </div>
+
+                <span class="style-arrow">↗</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="hairstyle-card">
+
+            <div class="hairstyle-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700"
+                        alt="Fade haircut">
+
+                <span class="style-number">03</span>
+
+            </div>
+
+            <div class="hairstyle-info">
+
+                <div>
+                    <h3>Fade Cut</h3>
+                    <p>Sharp and stylish appearance.</p>
+                </div>
+
+                <span class="style-arrow">↗</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                BOOK YOUR <span>SEAT.</span>
+            </div>
+
+            <p class="footer-description">
+                Your style, your choice, your booking.
+                Discover trusted salons, explore beauty
+                services and book appointments easily.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <div class="footer-links">
+                <a href="/Index.html">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#salons">Explore Salons</a>
+                <a href="#offers">Special Offers</a>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h3>Account</h3>
+
+            <div class="footer-links">
+                <a href="/login.html">Login</a>
+                <a href="/signup.html">Create Account</a>
+                <a href="#hairstyles">Trending Hairstyles</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 BOOK YOUR SEAT. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // OPEN THE SELECTED SALON DETAILS PAGE
+
+    function openSalonDetails(salonName) {
+
+        if (!salonName) {
+            alert("Salon information is missing.");
+            return;
+        }
+
+        const url =
+            "/salon-details.html?salon=" +
+            encodeURIComponent(salonName);
+
+        window.location.href = url;
+
+    }
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

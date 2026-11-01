@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | BOOK YOUR SEAT</title>
+
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <!-- Left Side -->
+    <div class="auth-image">
+        <div class="image-overlay">
+            <h1>BOOK YOUR SEAT.</h1>
+            <p>Your beauty journey starts here.</p>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="auth-form-container">
+
+        <a href="Index.html" class="back-home">
+            ← Back to Home
+        </a>
+
+        <div class="auth-form">
+
+            <h2>Welcome Back!</h2>
+
+            <p class="auth-subtitle">
+                Login to book your favourite salon.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                    >
+                </div>
+
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+
+                    <a href="#" id="forgotPassword">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="auth-button">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="switch-auth">
+                Don't have an account?
+                <a href="signup.html">Create Account</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="auth.js"></script>
+
+</body>
+</html>

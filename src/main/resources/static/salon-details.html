@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Salon Details | BOOK YOUR SEAT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fffdfb;
+            color: #302820;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* NAVIGATION */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: white;
+            border-bottom: 1px solid #eee7df;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #ad7550;
+        }
+
+        .nav-home {
+            color: #ad7550;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTAINER */
+
+        .details-container {
+            max-width: 1150px;
+            margin: 35px auto 75px;
+            padding: 0 22px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: #93877d;
+            margin-bottom: 25px;
+        }
+
+        .breadcrumb a {
+            color: #ad7550;
+        }
+
+        /* SALON BANNER */
+
+        .salon-banner {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 35px;
+            padding: 25px;
+            background: #f6eee7;
+            border-radius: 18px;
+            align-items: center;
+        }
+
+        .salon-banner img {
+            width: 100%;
+            height: 370px;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        .salon-details {
+            padding: 15px;
+        }
+
+        .salon-tag {
+            color: #ad7550;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .salon-details h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+
+        .rating {
+            color: #c28b32;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .salon-description {
+            color: #80766e;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .salon-meta {
+            display: grid;
+            gap: 12px;
+            color: #665b52;
+            font-size: 14px;
+        }
+
+        /* SECTION HEADINGS */
+
+        .section-heading {
+            text-align: center;
+            margin: 65px 0 35px;
+        }
+
+        .section-heading span {
+            color: #ad7550;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        .section-heading p {
+            color: #93877d;
+            font-size: 14px;
+        }
+
+        /* SERVICE CARDS */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .service-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 25px;
+            background: white;
+            border: 1px solid #eee3d9;
+            border-radius: 13px;
+            box-shadow: 0 7px 25px rgba(50, 35, 25, 0.04);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(50, 35, 25, 0.09);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            background: #f7eee6;
+            border-radius: 12px;
+            font-size: 23px;
+            margin-bottom: 13px;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .service-card p {
+            color: #93877d;
+            font-size: 13px;
+        }
+
+        .service-price {
+            color: #ad7550;
+            font-size: 19px;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .book-btn {
+            background: #ad7550;
+            color: white;
+            border: none;
+            padding: 12px 19px;
+            border-radius: 7px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #805238;
+            transform: translateY(-2px);
+        }
+
+        /* BENEFITS */
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 65px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 25px 15px;
+            background: #f7f1eb;
+            border-radius: 12px;
+        }
+
+        .benefit-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .benefit-card p {
+            color: #93877d;
+            font-size: 12px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #302820;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .salon-banner {
+                grid-template-columns: 1fr;
+            }
+
+            .salon-banner img {
+                height: 300px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .navbar {
+                padding: 17px 5%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .salon-banner {
+                padding: 15px;
+            }
+
+            .salon-banner img {
+                height: 230px;
+            }
+
+            .salon-details {
+                padding: 5px;
+            }
+
+            .salon-details h1 {
+                font-size: 31px;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+            }
+
+            .service-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+    <nav class="navbar">
+
+        <a href="Index.html" class="logo">
+            BOOK YOUR <span>SEAT.</span>
+        </a>
+
+        <a href="Index.html#salons" class="nav-home">
+            ← Back to Salons
+        </a>
+
+    </nav>
+</header>
+
+
+<!-- SALON DETAILS -->
+
+<main class="details-container">
+
+    <div class="breadcrumb">
+        <a href="Index.html">Home</a>
+        / <a href="Index.html#salons">Salons</a>
+        / <span id="breadcrumbSalon">Salon Details</span>
+    </div>
+
+    <section class="salon-banner">
+
+        <img
+                id="salonImage"
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900"
+                alt="Salon interior">
+
+        <div class="salon-details">
+
+            <span class="salon-tag">
+                PREMIUM BEAUTY EXPERIENCE
+            </span>
+
+            <h1 id="salonName">Loading salon...</h1>
+
+            <div class="rating" id="salonRating">
+                Loading rating...
+            </div>
+
+            <p class="salon-description" id="salonDescription">
+                Loading salon description...
+            </p>
+
+            <div class="salon-meta">
+
+                <p id="salonAddress">📍 Loading address...</p>
+
+                <p id="salonHours">🕒 Loading opening hours...</p>
+
+                <p id="salonPhone">📞 Loading contact number...</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <span>OUR SERVICES</span>
+
+            <h2>Choose Your Service</h2>
+
+            <p>Select a service and book your preferred appointment.</p>
+
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+            <p>Loading services...</p>
+        </div>
+
+    </section>
+
+
+    <!-- BENEFITS -->
+
+    <section class="benefits">
+
+        <div class="benefit-card">
+            <div class="benefit-icon">✂️</div>
+            <h3>Expert Stylists</h3>
+            <p>Professional salon specialists.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="benefit-icon">✨</div>
+            <h3>Premium Products</h3>
+            <p>Quality products and services.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="benefit-icon">📅</div>
+            <h3>Easy Booking</h3>
+            <p>Choose a convenient appointment time.</p>
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    © 2026 BOOK YOUR SEAT. All Rights Reserved.
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // Read the selected salon from the URL.
+
+    const params = new URLSearchParams(window.location.search);
+
+    const salonParam = params.get("salonId") || params.get("salon");
+
+    const servicesGrid = document.getElementById("servicesGrid");
+
+    const fallbackImage =
+        "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900";
+
+
+    // Icons for different services.
+
+    const serviceIcons = {
+        "Haircut": "✂️",
+        "Premium Haircut": "✂️",
+        "Basic Haircut": "✂️",
+        "Hair Spa": "💆",
+        "Hair Coloring": "🎨",
+        "Beard Styling": "💈",
+        "Beard Trim": "💈",
+        "Facial": "✨",
+        "Head Massage": "💆",
+        "Hair Wash": "🧴",
+        "Keratin Treatment": "💇"
+    };
+
+
+    // Convert database time into AM/PM format.
+
+    function formatTime(time) {
+
+        if (!time) {
+            return "Not specified";
+        }
+
+        const [hours, minutes] = time.split(":");
+
+        const date = new Date();
+
+        date.setHours(Number(hours), Number(minutes), 0, 0);
+
+        return date.toLocaleTimeString("en-IN", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        });
+    }
+
+
+    // Fetch salon information from Spring Boot.
+
+    async function loadSalonDetails() {
+
+        try {
+
+            if (!salonParam) {
+                throw new Error(
+                    "No salon was selected. Please return to the salons page."
+                );
+            }
+
+            // Fetch all salons.
+
+            const listResponse = await fetch("/api/salons");
+
+            if (!listResponse.ok) {
+                throw new Error("Could not load the salon list.");
+            }
+
+            const salons = await listResponse.json();
+
+
+            // Find the selected salon by ID or name.
+
+            const selectedSalon = /^\d+$/.test(salonParam)
+                ? salons.find(salon => salon.id === Number(salonParam))
+                : salons.find(salon =>
+                    salon.salonName.toLowerCase() === salonParam.toLowerCase()
+                );
+
+            if (!selectedSalon) {
+                throw new Error(
+                    "Salon not found. Please select a salon again."
+                );
+            }
+
+
+            // Fetch selected salon and its services.
+
+            const response = await fetch(
+                `/api/salons/${selectedSalon.id}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Could not load this salon's details.");
+            }
+
+            const data = await response.json();
+
+            const salon = data.salon;
+
+            const services = data.services || [];
+
+
+            // Display salon information.
+
+            document.title =
+                `${salon.salonName} | BOOK YOUR SEAT`;
+
+            document.getElementById("salonName").textContent =
+                salon.salonName;
+
+            document.getElementById("breadcrumbSalon").textContent =
+                salon.salonName;
+
+            document.getElementById("salonRating").textContent =
+                salon.rating != null
+                    ? `★★★★★ ${salon.rating} / 5`
+                    : "Rating not available";
+
+            document.getElementById("salonDescription").textContent =
+                salon.description || "Professional salon services.";
+
+
+            // Display salon image.
+
+            const salonImage = document.getElementById("salonImage");
+
+            salonImage.src = salon.image || fallbackImage;
+
+            salonImage.alt = `${salon.salonName} interior`;
+
+
+            // Display address, opening hours and phone.
+
+            document.getElementById("salonAddress").textContent =
+                `📍 ${[salon.address, salon.city]
+                    .filter(Boolean).join(", ")}`;
+
+            document.getElementById("salonHours").textContent =
+                `🕒 Open: ${formatTime(salon.openingTime)} – ${formatTime(salon.closingTime)}`;
+
+            document.getElementById("salonPhone").textContent =
+                `📞 ${salon.phone || "Contact not available"}`;
+
+
+            // Display services.
+
+            displayServices(salon, services);
+
+        } catch (error) {
+
+            console.error("Salon loading error:", error);
+
+            servicesGrid.textContent = error.message;
+
+        }
+    }
+
+
+    // Display services dynamically from MySQL.
+
+    function displayServices(salon, services) {
+
+        servicesGrid.innerHTML = "";
+
+        if (services.length === 0) {
+
+            servicesGrid.textContent =
+                "No services are currently available for this salon.";
+
+            return;
+        }
+
+        services.forEach(service => {
+
+            const card = document.createElement("div");
+
+            card.className = "service-card";
+
+
+            // Service information container.
+
+            const info = document.createElement("div");
+
+
+            // Service icon.
+
+            const icon = document.createElement("div");
+
+            icon.className = "service-icon";
+
+            icon.textContent =
+                serviceIcons[service.serviceName] || "✨";
+
+
+            // Service name.
+
+            const heading = document.createElement("h3");
+
+            heading.textContent = service.serviceName;
+
+
+            // Service description.
+
+            const description = document.createElement("p");
+
+            description.textContent =
+                service.description || "Professional salon service.";
+
+
+            // Service duration.
+
+            const duration = document.createElement("p");
+
+            duration.textContent =
+                `Duration: ${service.durationMinutes} minutes`;
+
+
+            // Service price.
+
+            const price = document.createElement("div");
+
+            price.className = "service-price";
+
+            price.textContent =
+                `₹${Number(service.price).toLocaleString("en-IN")}`;
+
+
+            // Book Now button.
+
+            const button = document.createElement("button");
+
+            button.type = "button";
+
+            button.className = "book-btn";
+
+            button.textContent = "Book Now";
+
+
+            // Redirect to booking page with actual database IDs.
+
+            button.addEventListener("click", function () {
+
+                bookService(salon, service);
+
+            });
+
+
+            // Add elements to the service card.
+
+            info.append(
+                icon,
+                heading,
+                description,
+                duration,
+                price
+            );
+
+            card.append(info, button);
+
+            servicesGrid.appendChild(card);
+
+        });
+    }
+
+
+    // Redirect to booking page.
+
+    function bookService(salon, service) {
+
+        const bookingUrl =
+            new URL("/booking.html", window.location.origin);
+
+        bookingUrl.searchParams.set("salonId", salon.id);
+
+        bookingUrl.searchParams.set("serviceId", service.id);
+
+        bookingUrl.searchParams.set("salon", salon.salonName);
+
+        bookingUrl.searchParams.set("service", service.serviceName);
+
+        bookingUrl.searchParams.set("price", service.price);
+
+        window.location.href = bookingUrl.toString();
+
+    }
+
+
+    // Start loading the selected salon.
+
+    loadSalonDetails();
+
+</script>
+
+</body>
+</html>

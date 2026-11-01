@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment | BOOK YOUR SEAT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #faf7f3;
+            color: #302820;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: white;
+            border-bottom: 1px solid #eee7df;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #ad7550;
+        }
+
+        .nav-home {
+            color: #ad7550;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .page-heading {
+            text-align: center;
+            padding: 45px 20px 30px;
+        }
+
+        .page-heading span {
+            color: #ad7550;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .page-heading h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            margin: 12px 0;
+        }
+
+        .page-heading p {
+            color: #887e75;
+            font-size: 14px;
+        }
+
+        .booking-container {
+            max-width: 1100px;
+            margin: 0 auto 70px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 0.9fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .booking-form,
+        .booking-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(50, 35, 25, 0.05);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+
+        .section-number {
+            display: inline-grid;
+            place-items: center;
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+            background: #f4e8dd;
+            color: #986441;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #e7ddd4;
+            border-radius: 7px;
+            outline: none;
+            background: #fffdfb;
+            font-size: 14px;
+            color: #302820;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ad7550;
+            box-shadow: 0 0 0 3px rgba(173, 117, 80, 0.10);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-option {
+            position: relative;
+        }
+
+        .time-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .time-option label {
+            display: block;
+            padding: 12px 5px;
+            text-align: center;
+            border: 1px solid #e7ddd4;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .time-option input:checked + label {
+            background: #ad7550;
+            color: white;
+            border-color: #ad7550;
+        }
+
+        .time-option label:hover {
+            border-color: #ad7550;
+        }
+
+        .booking-summary {
+            position: sticky;
+            top: 20px;
+        }
+
+        .booking-summary h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            margin-bottom: 22px;
+        }
+
+        .summary-image {
+            width: 100%;
+            height: 175px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .summary-detail {
+            padding: 13px 0;
+            border-bottom: 1px solid #eee7df;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .summary-detail span:first-child {
+            color: #887e75;
+        }
+
+        .summary-detail span:last-child {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 22px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .total-price strong {
+            color: #ad7550;
+            font-size: 23px;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 7px;
+            background: #ad7550;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background: #805238;
+        }
+
+        .notice {
+            color: #95887e;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .confirmation {
+            display: none;
+            max-width: 700px;
+            margin: 30px auto 70px;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(50, 35, 25, 0.06);
+        }
+
+        .confirmation-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .confirmation h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 12px;
+        }
+
+        .confirmation p {
+            color: #887e75;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 12px 22px;
+            background: #ad7550;
+            color: white;
+            border-radius: 7px;
+        }
+
+        .footer {
+            background: #302820;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .booking-form,
+            .booking-summary {
+                padding: 22px;
+            }
+
+            .page-heading h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+    <nav class="navbar">
+
+        <a href="../static/Index.html" class="logo">
+            BOOK YOUR <span>SEAT.</span>
+        </a>
+
+        <a href="../static/Index.html#salons" class="nav-home">
+            ← Back to Salons
+        </a>
+
+    </nav>
+</header>
+
+
+<!-- PAGE HEADING -->
+
+<section class="page-heading">
+
+    <span>YOUR BEAUTY EXPERIENCE</span>
+
+    <h1>Book Your Appointment</h1>
+
+    <p>Choose your preferred date and time to reserve your salon visit.</p>
+
+</section>
+
+
+<!-- BOOKING FORM -->
+
+<main class="booking-container" id="bookingContainer">
+
+    <form class="booking-form" id="bookingForm">
+
+        <!-- CUSTOMER DETAILS -->
+
+        <section class="form-section">
+
+            <h2>
+                <span class="section-number">1</span>
+                Your Information
+            </h2>
+
+            <div class="form-group">
+                <label for="customerName">Full Name *</label>
+                <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter your full name"
+                        required>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="customerEmail">Email Address *</label>
+                    <input
+                            type="email"
+                            id="customerEmail"
+                            placeholder="example@email.com"
+                            required>
+                </div>
+
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number *</label>
+                    <input
+                            type="tel"
+                            id="customerPhone"
+                            placeholder="10-digit mobile number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            inputmode="numeric"
+                            required>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATE SELECTION -->
+
+        <section class="form-section">
+
+            <h2>
+                <span class="section-number">2</span>
+                Select Appointment Date
+            </h2>
+
+            <div class="form-group">
+
+                <label for="appointmentDate">Preferred Date *</label>
+
+                <input
+                        type="date"
+                        id="appointmentDate"
+                        required>
+
+            </div>
+
+        </section>
+
+
+        <!-- TIME SELECTION -->
+
+        <section class="form-section">
+
+            <h2>
+                <span class="section-number">3</span>
+                Select Time Slot
+            </h2>
+
+            <div class="time-slots" id="timeSlots">
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time1" value="10:00 AM" required>
+                    <label for="time1">10:00 AM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time2" value="11:00 AM">
+                    <label for="time2">11:00 AM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time3" value="12:00 PM">
+                    <label for="time3">12:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time4" value="02:00 PM">
+                    <label for="time4">02:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time5" value="03:00 PM">
+                    <label for="time5">03:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time6" value="05:00 PM">
+                    <label for="time6">05:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time7" value="06:00 PM">
+                    <label for="time7">06:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time8" value="07:00 PM">
+                    <label for="time8">07:00 PM</label>
+                </div>
+
+                <div class="time-option">
+                    <input type="radio" name="appointmentTime"
+                           id="time9" value="08:00 PM">
+                    <label for="time9">08:00 PM</label>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADDITIONAL INFORMATION -->
+
+        <section class="form-section">
+
+            <h2>
+                <span class="section-number">4</span>
+                Additional Information
+            </h2>
+
+            <div class="form-group">
+
+                <label for="specialRequest">
+                    Special Requests (Optional)
+                </label>
+
+                <textarea
+                        id="specialRequest"
+                        rows="3"
+                        placeholder="Any specific requirements?"></textarea>
+
+            </div>
+
+        </section>
+
+        <button type="submit" class="confirm-btn">
+            Confirm Booking →
+        </button>
+
+    </form>
+
+
+    <!-- BOOKING SUMMARY -->
+
+    <aside class="booking-summary">
+
+        <h2>Booking Summary</h2>
+
+        <img
+                id="summaryImage"
+                class="summary-image"
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700"
+                alt="Selected salon">
+
+        <div class="summary-detail">
+            <span>Salon</span>
+            <span id="summarySalon">Loading...</span>
+        </div>
+
+        <div class="summary-detail">
+            <span>Service</span>
+            <span id="summaryService">Loading...</span>
+        </div>
+
+        <div class="summary-detail">
+            <span>Appointment Date</span>
+            <span id="summaryDate">Not selected</span>
+        </div>
+
+        <div class="summary-detail">
+            <span>Appointment Time</span>
+            <span id="summaryTime">Not selected</span>
+        </div>
+
+        <div class="total-price">
+            <span>Total Amount</span>
+            <strong id="summaryPrice">₹0</strong>
+        </div>
+
+        <p class="notice">
+            Your appointment details will be reviewed before
+            the booking is saved.
+        </p>
+
+    </aside>
+
+</main>
+
+
+<!-- TEMPORARY FRONTEND CONFIRMATION -->
+
+<section class="confirmation" id="confirmation">
+
+    <div class="confirmation-icon">✓</div>
+
+    <h2>Booking Details Ready!</h2>
+
+    <p id="confirmationMessage"></p>
+
+    <a href="../static/Index.html" class="back-btn">
+        Back to Home
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    © 2026 BOOK YOUR SEAT. All Rights Reserved.
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // 1. GET DETAILS FROM URL
+
+    const params = new URLSearchParams(window.location.search);
+
+    const salonName = params.get("salon");
+    const serviceName = params.get("service");
+    const servicePrice = Number(params.get("price"));
+
+
+    // 2. CHECK URL INFORMATION
+
+    if (!salonName || !serviceName ||
+        !Number.isFinite(servicePrice) || servicePrice <= 0) {
+
+        alert("Booking information is missing. Please select a service again.");
+
+        window.location.replace("Index.html#salons");
+
+    } else {
+
+        document.getElementById("summarySalon").textContent = salonName;
+
+        document.getElementById("summaryService").textContent = serviceName;
+
+        document.getElementById("summaryPrice").textContent =
+            "₹" + servicePrice.toLocaleString("en-IN");
+
+        document.title = "Book " + serviceName + " | BOOK YOUR SEAT";
+
+    }
+
+
+    // 3. SET TODAY AS MINIMUM DATE
+
+    const dateInput = document.getElementById("appointmentDate");
+
+    const today = new Date();
+
+    const localToday =
+        today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0") + "-" +
+        String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = localToday;
+
+
+    // 4. UPDATE DATE IN SUMMARY
+
+    dateInput.addEventListener("change", function() {
+
+        document.getElementById("summaryDate").textContent =
+            this.value || "Not selected";
+
+    });
+
+
+    // 5. UPDATE TIME IN SUMMARY
+
+    document.querySelectorAll(
+        'input[name="appointmentTime"]'
+    ).forEach(function(radio) {
+
+        radio.addEventListener("change", function() {
+
+            document.getElementById("summaryTime").textContent =
+                this.value;
+
+        });
+
+    });
+
+
+    // 6. HANDLE FORM SUBMISSION
+
+    document.getElementById("bookingForm").addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            if (!this.reportValidity()) {
+                return;
+            }
+
+            const customerName =
+                document.getElementById("customerName").value.trim();
+
+            const appointmentDate = dateInput.value;
+
+            const appointmentTime =
+                document.querySelector(
+                    'input[name="appointmentTime"]:checked'
+                ).value;
+
+            const phone =
+                document.getElementById("customerPhone").value;
+
+            const email =
+                document.getElementById("customerEmail").value;
+
+            const specialRequest =
+                document.getElementById("specialRequest").value.trim();
+
+            const selectedDate = new Date(
+                appointmentDate + "T00:00:00"
+            );
+
+            const dateText = selectedDate.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
+            document.getElementById("bookingContainer").style.display =
+                "none";
+
+            document.getElementById("confirmation").style.display =
+                "block";
+
+            document.getElementById("confirmationMessage").textContent =
+                "Thank you, " + customerName +
+                "! Your selected service is " + serviceName +
+                " at " + salonName +
+                " on " + dateText +
+                " at " + appointmentTime +
+                ". Your details are ready for submission. No appointment has been saved yet.";
+
+            console.log("Booking form details:", {
+                salonName: salonName,
+                serviceName: serviceName,
+                price: servicePrice,
+                customerName: customerName,
+                email: email,
+                phone: phone,
+                appointmentDate: appointmentDate,
+                appointmentTime: appointmentTime,
+                specialRequest: specialRequest
+            });
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
